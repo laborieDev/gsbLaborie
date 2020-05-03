@@ -1,0 +1,130 @@
+{# VALIDER FICHE #}
+<div class="modal" id="validation-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Validation Fiche Hors Forfait</h5>
+        <button onclick="closeModal('validation-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="validation-modal-content" style="user-select: auto;">Veuillez confirmer la validation de la fiche hors forfait de </p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="validation-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Valider</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('validation-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# CLOTURER FICHE #}
+<div class="modal" id="delete-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Clôture Fiche Hors Forfait</h5>
+        <button onclick="closeModal('delete-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="delete-modal-content" style="user-select: auto;">Veuillez confirmer la suppression de la fiche hors forfait de </p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="delete-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Supprimer</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('delete-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# REMBOURSEMENT FICHE #}
+<div class="modal" id="rembourser-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Remboursement Fiche Hors Forfait</h5>
+        <button onclick="closeModal('rembourser-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="rembourser-modal-content" style="user-select: auto;">Veuillez confirmer le remboursement de la fiche hors forfait de </p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="rembourser-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Rembourser</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('rembourser-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# AJOUT JUSTIFICATIFS #}
+<div class="modal" id="justificatif-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Remboursement Fiche Hors Forfait</h5>
+        <button onclick="closeModalJustificatif('justificatif-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <form id="justificatif-modal-form" action="/comptable/validation_fiches/add_justificatifs/" method="post">
+        <div class="modal-body" style="user-select: auto;">
+          <p id="justificatif-modal-content" style="user-select: auto;">Veuillez saisir le nombre de justificatifs à ajouter. </p>
+            <div class="form-group" style="user-select: auto;">
+                <input name="nbJustificatif" type="number" class="form-control" placeholder="Nombre justificatifs" style="user-select: auto;" min="1" required>
+            </div>
+        </div>
+        <div class="modal-footer" style="user-select: auto;">
+          <button id="justificatif-modal-button" type="submit" class="btn btn-primary" style="user-select: auto;">Ajouter</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModalJustificatif('justificatif-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    var content = "";
+    var action = "";
+
+    function getModal(id, idFiche, username){
+        var modal = document.getElementById(id);
+        var modalContent = document.getElementById(id+'-content');
+        modal.style.display='block';
+        content = modalContent.innerHTML;    
+        modalContent.innerHTML += username; 
+
+        var action;
+        if(id == "validation-modal")
+          action = "VA";
+        else if(id == "rembourser-modal")
+          action = "RB";
+        else
+          action="DELETE";
+
+        document.getElementById(id+'-button').onclick = function() { document.location.href="/comptable/validation_fiches/"+action+"/"+idFiche}; 
+    }
+
+    function closeModal(id){
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id+'-content').innerHTML = content;
+    }
+
+    function getModalJustificatifs(id, idFiche){
+        var modal = document.getElementById(id);
+        var modalForm = document.getElementById(id+'-form');
+        modal.style.display='block';
+        action = modalForm.action;    
+        modalForm.action += idFiche;
+    }
+
+    function closeModalJustificatif(id){
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id+'-form').action = action;
+    }
+
+</script>

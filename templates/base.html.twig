@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}GSB{% endblock %}</title>
+        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.css" />
+        <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon/" />
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="user-select: auto;">
+        <a class="navbar-brand" id="logo-gsb-navbar" href="#" style="user-select: auto;"><img src="/img/logo-gsb.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="user-select: auto;">
+          <span class="navbar-toggler-icon" style="user-select: auto;"></span>
+        </button>
+
+        {% if app.user %}
+
+          {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                <div class="collapse navbar-collapse" id="navbarColor03" style="user-select: auto;">
+                    <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                      <li class="nav-item" style="user-select: auto;">
+                        <a class="nav-link" href="{{ path('dashboard-admin') }}" style="user-select: auto;">Tableau de bord <i class="fa fa-tachometer"></i></a>
+                      </li>
+                      <li class="nav-item" style="user-select: auto;">
+                        <a class="nav-link" href="{{ path('new_user') }}" style="user-select: auto;">Ajouter un utilisateur <i class="fa fa-plus"></i></a>
+                      </li>
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0" style="user-select: auto;">
+                      <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                        <li class="nav-item" id="user-name-navabar">{{ app.user.username }}</li>
+                      </ul>
+                      <a href="{{ path('security_logout') }}" class="btn btn-secondary my-2 my-sm-0" style="user-select: auto;">Déconnexion</a>
+                </div>
+
+          {% else %}
+
+              {% if app.user.isComptable %}
+                  <div class="collapse navbar-collapse" id="navbarColor03" style="user-select: auto;">
+                    <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                      <li class="nav-item" style="user-select: auto;">
+                        <a class="nav-link" href="{{ path('valid_fiches') }}" style="user-select: auto;">Valider une fiche <i class="fa fa-check"></i></a>
+                      </li>
+                      <li class="nav-item" style="user-select: auto;">
+                        <a class="nav-link" href="{{ path('rembourser_fiches') }}" style="user-select: auto;">Rembourser une fiche <i class="fa fa-credit-card"></i></a>
+                      </li>
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0" style="user-select: auto;">
+                      <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                        <li class="nav-item" id="user-name-navabar">{{ app.user.username }}</li>
+                      </ul>
+                      <a href="{{ path('security_logout') }}" class="btn btn-secondary my-2 my-sm-0" style="user-select: auto;">Déconnexion</a>
+                  </div>
+
+              {% else %}
+                  <div class="collapse navbar-collapse" id="navbarColor03" style="user-select: auto;">
+                        <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                          <li class="nav-item" style="user-select: auto;">
+                            <a class="nav-link" href="{{ path('new_fiche_forfait') }}" style="user-select: auto;">Saisir une fiche forfait <i class="fa fa-plus"></i> </a>
+                          </li>
+                          <li class="nav-item" style="user-select: auto;">
+                            <a class="nav-link" href="{{ path('new_fiche_hf') }}" style="user-select: auto;">Saisir une fiche hors forfait <i class="fa fa-plus"></i> </a>
+                          </li>
+                          <li class="nav-item" style="user-select: auto;">
+                            <a class="nav-link" href="{{ path('get_fiches') }}" style="user-select: auto;">Afficher mes fiches <i class="fa fa-eye"></i> </a>
+                          </li>
+                        </ul>
+                        <div class="form-inline my-2 my-lg-0" style="user-select: auto;">
+                          <ul class="navbar-nav mr-auto" style="user-select: auto;">
+                            <li class="nav-item" id="user-name-navabar">{{ app.user.username }}</li>
+                          </ul>
+                          <a href="{{ path('security_logout') }}" class="btn btn-secondary my-2 my-sm-0" style="user-select: auto;">Déconnexion</a>
+                      </div>
+                  </div>
+
+              {% endif %}
+            {% endif %}
+        {% endif %}
+    </nav>
+
+        <div class="container">
+          {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

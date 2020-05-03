@@ -1,0 +1,20 @@
+  {% if error_message is defined %}
+      <div class="alert alert-dismissible alert-warning" style="user-select: auto;" id="alert-message-error">
+          <button onclick="closeAlertMessage('error')" type="button" class="close" data-dismiss="alert" style="user-select: auto;">&times;</button>
+          <h4 class="alert-heading" style="user-select: auto;">Attention !</h4>
+          <p class="mb-0" style="user-select: auto;">{{ error_message | raw }}</p>
+      </div>
+  {% endif %}
+  {% if valid_message is defined %}
+      <div class="alert alert-dismissible alert-success" style="user-select: auto;" id="alert-message-valid">
+          <button onclick="closeAlertMessage('valid')" type="button" class="close" data-dismiss="alert" style="user-select: auto;">&times;</button>
+          <h4 class="alert-heading" style="user-select: auto;">Bien joué !</h4>
+          <p class="mb-0" style="user-select: auto;">{{ valid_message | raw }}</p>
+      </div>
+  {% endif %}
+
+  <script>
+    function closeAlertMessage(type){
+        document.getElementById('alert-message-'+type).style.display = "none";
+    }
+</script>

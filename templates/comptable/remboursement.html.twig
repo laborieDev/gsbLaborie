@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="wrapper">
+
+        {% include '/includes/messages.html.twig' %}
+
+        <h1>Rembourser les fiches</h1>
+    
+        <table class="table table-hover" style="user-select: auto;">
+          <tr class="table-dark" style="user-select: auto;">
+            <td style="user-select: auto;">Date</td>
+            <td style="user-select: auto;">Libellé</td>
+            <td style="user-select: auto;">Montant</td>
+            <td style="user-select: auto;">Nb justificatifs</td>
+            <td style="user-select: auto;">Visiteur</td>
+            <td style="user-select: auto;"><a href="#" onclick="getFilters()"><i class="fa fa-filter"></i> Filtres </a></td>
+          </tr>
+          
+          <tr class="table-success" style="user-select: auto;" id="filtres-section">
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-0" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-1" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-2" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-3" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-4" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><a href="#" onclick="deleteFilters()" class="delete-filters-link"><i class="fa fa-times"></i> Effacer</a></td>
+          </tr>
+
+        {% for fiche in fiches %}
+          <tr class="table-light fiches-data" style="user-select: auto;" id="data-{{ fiche.id }}">
+            <td style="user-select: auto;" class="data-0">{{ fiche.date | date("d.m.yy") }}</td>
+            <td style="user-select: auto;" class="data-1">{{ fiche.libelle }}</td>
+            <td style="user-select: auto;" class="data-2">{{ fiche.montant|number_format(2, ',', '.') }} €</td>
+            <td style="user-select: auto;" class="data-3">{{ fiche.nb_justificatifs | number_format}}</td>
+            <td style="user-select: auto;" class="data-4">{{ fiche.username }}</td>
+            <td style="user-select: auto;">
+              <a href="#" onclick="getModal('rembourser-modal', {{ fiche.id }}, '{{ fiche.username }}')"><i class="fa fa-credit-card" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    {% include '/includes/modaux-validation.html.twig' %}
+    {% include '/includes/filtres-gestion.html.twig' %}
+    
+{% endblock %}

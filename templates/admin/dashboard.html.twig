@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table table-hover" style="user-select: auto;">
+          <tr class="table-dark" style="user-select: auto;">
+            <td style="user-select: auto;">Nom</td>
+            <td style="user-select: auto;">Login</td>
+            <td style="user-select: auto;">Adresse</td>
+            <td style="user-select: auto;">NBF Forfait</td>
+            <td style="user-select: auto;">NBF Hors Forfait</td>
+            <td style="user-select: auto;"><a href="#" onclick="getFilters()"><i class="fa fa-filter"></i> Filtres </a></td>
+          </tr>
+          
+          <tr class="table-success" style="user-select: auto;" id="filtres-section">
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-0" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-1" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-2" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-3" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-4" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><a href="#" onclick="deleteFilters()" class="delete-filters-link"><i class="fa fa-times"></i> Effacer</a></td>
+          </tr>
+
+        {% for user in users|reverse %}
+          <tr class="table-light fiches-data" style="user-select: auto;" id="data-{{ user.id }}">
+            <td style="user-select: auto;" class="data-0">{{ user.username }}</td>
+            <td style="user-select: auto;" class="data-1">{{ user.login }}</td>
+            <td style="user-select: auto;" class="data-2">{{ user.adresse }}</td>
+            <td style="user-select: auto;" class="data-3">{{ user.ficheForfaits | length }} </td>
+            <td style="user-select: auto;" class="data-4">{{ user.ficheForfaits | length }} </td>
+            <td style="user-select: auto;">
+            </td>
+          </tr>
+        {% endfor %}
+        </table>
+
+        {% include '/includes/filtres-gestion.html.twig' %}
+
+{% endblock %}

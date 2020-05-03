@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>{{ gestion }} une fiche hors forfait</h1>
+
+    {{ form_start(formFiche) }}
+
+    <div class="form-group" style="user-select: auto;">
+        {{ form_row(formFiche.libelle, {'attr' : {'class':'form-control'}, 'label' : 'Libellé'}) }}
+    </div>
+    <div class="form-group" style="user-select: auto;">
+        {{ form_row(formFiche.montant , {'attr' : {'class':'form-control'}}) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ gestion }}</button>
+    {{ form_end(formFiche) }}
+</div>
+{% endblock %}

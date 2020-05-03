@@ -1,0 +1,33 @@
+<script>
+    var filters = document.getElementById('filtres-section')
+    filters.style.display = "none";
+    function getFilters(){
+        if(filters.style.display == "none")
+            filters.style.display = "table-row";
+        else
+            filters.style.display = "none";
+    }
+    
+    function updateFilters(){
+        valuesFilters = new Array();
+        for(i=0; i<5; i++){
+            var filter = document.getElementById('filter-'+i);
+            valuesFilters[i] = filter.value.toLocaleLowerCase();
+        }
+        var fiches = document.getElementsByClassName('fiches-data');
+        for(i = 0; i < fiches.length; i++){
+            fiches[i].style.display = "table-row";
+            for(j = 0; j < 5; j++){
+                if(fiches[i].querySelector('.data-'+j).innerHTML.toLocaleLowerCase().indexOf(valuesFilters[j]) == -1)
+                    fiches[i].style.display="none";
+            }
+        }
+    }
+    
+    function deleteFilters(){
+        var filters = document.getElementsByClassName('filter-input');
+        for(i = 0; i < filters.length; i++)
+            filters[i].value = "";
+        updateFilters();
+    }
+</script>
