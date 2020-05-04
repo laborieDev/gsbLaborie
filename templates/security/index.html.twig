@@ -18,7 +18,9 @@
         </div>
     </form>
     {% else %}
-        {% if app.user.isComptable %}
+        {% if app.user.roles[0] == "ROLE_ADMIN" %}
+            <script>document.location.href="/admin"; </script>
+        {% elseif app.user.isComptable %}
             <script>document.location.href="/comptable"; </script>
         {% else %}
             <script>document.location.href="/visiteur"; </script>
