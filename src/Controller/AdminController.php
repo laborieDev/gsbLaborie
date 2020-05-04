@@ -43,7 +43,9 @@ class AdminController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->render('navbar/index.html.twig');
+            return $this->redirectToRoute('dashboard-admin',[
+                "valid_message" => "Action bien prise en compte !"
+            ]);
 
         }        
         return $this->render('admin/newuser.html.twig', [
@@ -56,6 +58,12 @@ class AdminController extends AbstractController
      */
     public function dashboard(UserRepository $repo){
         $users = $repo->findAll();
+        if(isset($_GET['valid_message']))
+            return $this->render('admin/dashboard.html.twig',[
+                "users" => $users,
+                "valid_message" => $_GET['valid_message']
+            ]);
+
         return $this->render('admin/dashboard.html.twig',[
             "users" => $users
         ]);
