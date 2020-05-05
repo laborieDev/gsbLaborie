@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FicheForfaitRepository")
@@ -35,6 +36,7 @@ class FicheForfait
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive(message = "La quantité doit être postive !")
      */
     private $qte;
 

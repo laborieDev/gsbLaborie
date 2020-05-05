@@ -43,7 +43,7 @@
             <td style="user-select: auto;">Nombre de justificatifs</td>
             <td style="user-select: auto;">Gestion</td>
           </tr>
-          
+
         {% for fiche in user.ficheHorsForfaits|reverse %}
           <tr class="table-light" style="user-select: auto;">
             <td style="user-select: auto;">{{ fiche.date | date("d.m.yy") }}</td>
@@ -53,10 +53,12 @@
             <td style="user-select: auto;">{{ fiche.nbJustificatifs | number_format}}</td>
             <td style="user-select: auto;">
               {% if fiche.idEtat.idEtat == "CR" %}
-                <a href="{{ path('cloture_fiche_hf', {'id': fiche.id}) }}"><i class="fa fa-check"></i></a>
+                <a href="#" onclick="getModal('cloture-modal', '{{ fiche.id }}')"><i class="fa fa-check"></i></a>
+                <a href="{{ path('edit_fiche_hf', {'id': fiche.id}) }}"><i class="fa fa-edit"></i></a>
+                <a href="#" onclick="getModal('delete-modal', '{{ fiche.id }}')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              {% else %}
+                <i class="fa fa-user-times" title="Vous ne pouvez pas modifier une {{ fiche.idEtat.libelle }}."></i>
               {% endif %}
-              <a href="{{ path('edit_fiche_hf', {'id': fiche.id}) }}"><i class="fa fa-edit"></i></a>
-              <a href="#" onclick="deleteFiche({{fiche.id}})"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
           </tr>
         {% endfor %}
@@ -67,6 +69,8 @@
 
     
 </div>
+
+  {% include '/includes/modaux-visiteur.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
@@ -88,12 +92,5 @@
     thisElementLink.classList = "nav-link get-fiches-nav-item active";
   }
 
-  function deleteFiche(id){
-    if ( confirm( "Message à afficher" ) ){
-      {% set id = 'id' %}
-      var route = "/visiteur/deleteFicheHf/"+id;
-      document.location.href= route; 
-    }
-  }
 </script>
 {% endblock %}

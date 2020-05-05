@@ -1,0 +1,63 @@
+{# CLOTURER FICHE #}
+<div class="modal" id="cloture-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Clôture Fiche Hors Forfait</h5>
+        <button onclick="closeModal('cloture-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="cloture-modal-content" style="user-select: auto;">Veuillez confirmer la clôture de cette fiche hors forfait. </p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="cloture-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Clôturer</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('cloture-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# SUPPRESSION FICHE #}
+<div class="modal" id="delete-modal"style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Suppression Fiche Hors Forfait</h5>
+        <button onclick="closeModal('delete-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="delete-modal-content" style="user-select: auto;">Veuillez confirmer la suppression de cette fiche hors forfait.</p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="delete-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Supprimer</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('delete-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var action = "";
+
+    function getModal(id, idFiche){
+        var modal = document.getElementById(id);
+        modal.style.display='block'; 
+
+        var action;
+        if(id == "cloture-modal")
+          action = "clotureFicheHf";
+        else
+          action="deleteFicheHf";
+
+        document.getElementById(id+'-button').onclick = function() { document.location.href="/visiteur/"+action+"/"+idFiche}; 
+    }
+
+    function closeModal(id){
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id+'-content').innerHTML = content;
+    }
+</script>

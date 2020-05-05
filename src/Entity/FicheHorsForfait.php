@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FicheHorsForfaitRepository")
@@ -34,6 +35,7 @@ class FicheHorsForfait
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Positive(message = "Le montant doit être positif !")
      */
     private $montant;
 
