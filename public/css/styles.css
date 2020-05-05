@@ -25,3 +25,5 @@ td{font-size : 14px}
 input[type='checkbox']{
     margin-left : 10px
 }
+
+.table-dark:hover td{color : white}

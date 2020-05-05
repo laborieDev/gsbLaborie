@@ -75,8 +75,7 @@ class AdminController extends AbstractController
         $form->handleRequest($req);
 
         if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-
+            
             if($user->getIsComptable())
                 $user->setRoles(array("ROLE_COMPTABLE"));
             else
