@@ -8,17 +8,25 @@
             <td style="user-select: auto;">Nom</td>
             <td style="user-select: auto;">Login</td>
             <td style="user-select: auto;">Adresse</td>
+            <td style="user-select: auto;">Poste</td>
             <td style="user-select: auto;">NBF Forfait</td>
             <td style="user-select: auto;">NBF Hors Forfait</td>
             <td style="user-select: auto;"><a href="#" onclick="getFilters()"><i class="fa fa-filter"></i> Filtres </a></td>
           </tr>
           
           <tr class="table-success" style="user-select: auto;" id="filtres-section">
-            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-0" onkeyup="updateFilters()"></td>
-            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-1" onkeyup="updateFilters()"></td>
-            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-2" onkeyup="updateFilters()"></td>
-            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-3" onkeyup="updateFilters()"></td>
-            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-4" onkeyup="updateFilters()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-0" onkeyup="updateFiltersUser()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-1" onkeyup="updateFiltersUser()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-2" onkeyup="updateFiltersUser()"></td>
+            <td style="user-select: auto;">
+              <select class="filter-input" id="filter-poste" onchange="updateFiltersUser()">
+                <option value="comptable">Comptable</option>
+                <option value="visiteur">Visiteur</option>
+                <option value="" selected>Les deux</option>
+              </select>
+            </td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-3" onkeyup="updateFiltersUser()"></td>
+            <td style="user-select: auto;"><input type="text" class="filter-input" id="filter-4" onkeyup="updateFiltersUser()"></td>
             <td style="user-select: auto;"><a href="#" onclick="deleteFilters()" class="delete-filters-link"><i class="fa fa-times"></i> Effacer</a></td>
           </tr>
 
@@ -27,6 +35,13 @@
             <td style="user-select: auto;" class="data-0">{{ user.username }}</td>
             <td style="user-select: auto;" class="data-1">{{ user.login }}</td>
             <td style="user-select: auto;" class="data-2">{{ user.adresse }}</td>
+            <td style="user-select: auto;" class="data-poste">
+              {% if user.isComptable %}
+                <p>Comptable</p>
+              {% else %}
+                <p>Visiteur</p>
+              {% endif %}
+            </td>
             <td style="user-select: auto;" class="data-3">{{ user.ficheForfaits | length }} </td>
             <td style="user-select: auto;" class="data-4">{{ user.ficheForfaits | length }} </td>
             <td style="user-select: auto;">

@@ -30,4 +30,17 @@
             filters[i].value = "";
         updateFilters();
     }
+
+
+    // FONCTION POUR ADMIN DASHBOARD
+    function updateFiltersUser(){
+        var selectValue = document.getElementById('filter-poste').value;
+        updateFilters();
+        
+        var users = document.getElementsByClassName('fiches-data');
+        for(i = 0; i < users.length; i++){
+            if(users[i].querySelector('.data-poste').innerHTML.toLocaleLowerCase().indexOf(selectValue) == -1)
+                users[i].style.display="none";
+        }
+    }
 </script>

@@ -89,7 +89,7 @@ class UserFixtures extends Fixture
                 for($i=1; $i<=2; $i++){
                     $fiche = new FicheHorsForfait();
 
-                    $etat = $etatRepo->findOneBy(['idEtat' => 'CR']);
+                    $etat = $etatRepo->findOneBy(['idEtat' => 'CL']);
                 
                     $fiche->setIdVisiteur($user)
                           ->setIdEtat($etat)
@@ -113,6 +113,20 @@ class UserFixtures extends Fixture
 
                     $manager->persist($fiche);
                 }
+
+                $fiche = new FicheHorsForfait();
+
+                $etat = $etatRepo->findOneBy(['idEtat' => 'CR']);
+            
+                $fiche->setIdVisiteur($user)
+                      ->setIdEtat($etat)
+                      ->setLibelle($faker->realText(40))
+                      ->setMontant($faker->randomFloat(2, 0, 120))
+                      ->setDate(new \DateTime())
+                      ->setNbJustificatifs(0);
+            
+
+                $manager->persist($fiche);
             }
         }
 
