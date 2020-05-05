@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
@@ -28,6 +30,10 @@ class UserType extends AbstractType
             ])
             ->add('adresse', TextType::class, [
                 'attr' => ['class' => 'form-control']
+            ])
+            ->add('isComptable', CheckboxType::class, [
+                'label'    => 'Est-il comptable ?',
+                'required' => false,
             ])
         ;
     }

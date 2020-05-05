@@ -8,3 +8,14 @@
 .nav-tabs{cursor : pointer}
 
 .delete-filters-link{color : red}
+
+.form-group ul{padding : 0}
+.form-group li{
+    list-style: none;
+    color : red;
+}
+.form-group li::before{
+    content : "\f071";
+    font-family: "FontAwesome";
+    margin-right : 5px;
+}
