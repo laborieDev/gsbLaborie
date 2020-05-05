@@ -45,11 +45,16 @@
             <td style="user-select: auto;" class="data-3">{{ user.ficheForfaits | length }} </td>
             <td style="user-select: auto;" class="data-4">{{ user.ficheForfaits | length }} </td>
             <td style="user-select: auto;">
+              <a href="{{ path('edit_user', {'id' : user.id}) }}"><i class="fa fa-edit"></i></a>
+              <a href="#" onclick="getModalDeleteUser('{{ user.id }}', '{{ user.username }}')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </td>
           </tr>
         {% endfor %}
         </table>
 
+        
         {% include '/includes/filtres-gestion.html.twig' %}
+        {% include '/includes/modaux-admin.html.twig' %}
+
 
 {% endblock %}

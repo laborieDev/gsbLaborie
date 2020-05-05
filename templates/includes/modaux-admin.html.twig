@@ -1,0 +1,41 @@
+{# SUPPRESSION FICHE #}
+<div class="modal" id="delete-modal" style="user-select: auto;">
+  <div class="modal-dialog" role="document" style="user-select: auto;">
+    <div class="modal-content" style="user-select: auto;">
+      <div class="modal-header" style="user-select: auto;">
+        <h5 class="modal-title" style="user-select: auto;">Suppresion d'un utilisateur</h5>
+        <button onclick="closeModal('delete-modal')" type="button" class="close" data-dismiss="modal" aria-label="Close" style="user-select: auto;">
+          <span aria-hidden="true" style="user-select: auto;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="user-select: auto;">
+        <p id="delete-modal-content" style="user-select: auto;">Veuillez confirmer la suppression du compte de </p>
+      </div>
+      <div class="modal-footer" style="user-select: auto;">
+        <button id="delete-modal-button" type="button" class="btn btn-primary" style="user-select: auto;">Supprimer</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('delete-modal')" data-dismiss="modal" style="user-select: auto;">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var content = "";
+    var action = "";
+
+    function getModalDeleteUser(idUser, username){
+        var modal = document.getElementById("delete-modal");
+        var modalContent = document.getElementById('delete-modal-content');
+        modal.style.display='block';
+        content = modalContent.innerHTML;    
+        modalContent.innerHTML += username;
+
+        document.getElementById('delete-modal-button').onclick = function() { document.location.href="/admin/delete_user/"+idUser}; 
+    }
+
+    function closeModal(id){
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id+'-content').innerHTML = content;
+    }
+
+</script>
